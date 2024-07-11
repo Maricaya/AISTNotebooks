@@ -11,6 +11,7 @@ Requires installing and mounting flexFS.
     python3 999-H0-00-IMERG-Analyze-1.py
 
     sciunit create feature_db
+    export TZ='America/Chicago'
     sciunit exec python3 featureDB_make_labels.py
     sciunit exec python3 featureDB_make_df.py
     sciunit exec python3 999-H0-00-IMERG-Analyze-1.py

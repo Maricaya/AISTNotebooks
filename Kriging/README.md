@@ -20,5 +20,5 @@ All files required by the Kriging application can be downloaded by running the f
     ./run_kriging.sh 
 
 # Usage With Sciunit
-    sciunit create Kriging
+    sciunit create Kriging && export TZ='America/Chicago'
     sciunit exec ./run_kriging.sh 

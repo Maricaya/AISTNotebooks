@@ -6,7 +6,7 @@ ENV TZ=US \
 # Installing package dependencies
 RUN apt-get update && \
 	apt-get upgrade -y && \
-	apt-get install -y git wget bzip2 libtool m4 automake build-essential python3 python3-pip python3-dev python3-venv libblas-dev liblapack-dev libatlas-base-dev gfortran libopenblas-dev libblis-dev libmkl-dev curl openssl libssl-dev libcurl4-openssl-dev libgeos-dev python3-tk libhdf4-dev libproj-dev proj-data proj-bin
+	apt-get install -y git wget bzip2 libtool m4 automake build-essential python3 python3-pip python3-dev python3-venv libblas-dev liblapack-dev libatlas-base-dev gfortran libopenblas-dev libblis-dev libmkl-dev curl openssl libssl-dev libcurl4-openssl-dev libgeos-dev python3-tk libhdf4-dev libproj-dev proj-data proj-bin vim
 RUN wget https://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.xz && \
 	tar -xf autoconf-2.71.tar.xz && \
 	cd autoconf-2.71/ && \
