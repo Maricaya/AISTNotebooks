@@ -9,16 +9,17 @@ All files required by the Kriging application can be downloaded by running the f
 
  	mkdir data_src
   	cd data_src
- 	while read p;do wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies --keep-session-cookies --user=xchu -r -c -nH -nd -np -A "$p" --content-disposition "https://aura.gesdisc.eosdis.nasa.gov/data/Aura_OMI_Level2/OMO3PR.003/2021/001"; done < spec_list.txt
+   	# --user=<uid> 
+   	wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies --keep-session-cookies --user=xchu -r -c -nH -nd -np -A "$p" --content-disposition "https://aura.gesdisc.eosdis.nasa.gov/data/Aura_OMI_Level2/OMO3PR.003/2021/001";
 # Build	
  	docker build -t krigging .
 
 # Usage
  	docker run -it krigging
 	cd NOGGIN && echo 'PYTHONPATH=./ python3 ./Krige/noggin_krige.py -d ./data_src/ -n HDFEOS/SWATHS/O3Profile/Data\ Fields/O3 -m gamma_rayleigh_nuggetless_variogram_model -v' > start.sh
-    chmod +x ./run_kriging.sh 
-    ./run_kriging.sh 
+    chmod +x ./start.sh
+    ./start.sh
 
 # Usage With Sciunit
     sciunit create Kriging && export TZ='America/Chicago'
-    sciunit exec ./run_kriging.sh 
+    sciunit exec ./start.sh

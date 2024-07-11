@@ -76,4 +76,4 @@ RUN python3 -m pip install sciunit2
 RUN export TZ='America/Chicago'
 
 # Copying HDF5 data files
-COPY ./data_src/ ./NOGGIN/data_src/
+COPY ./data_src/*.he5 ./NOGGIN/data_src/
