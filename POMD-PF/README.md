@@ -12,3 +12,8 @@ Requires installing and mounting flexFS.
     sciunit create pomd_pf && export TZ='America/Chicago'
     sciunit exec python3 POMD-PF.AIST.10202022.py
   	sciunit exec python3 POMD-PF.AIST.SA.Storms.py
+
+    sciunit repeat e1
+    sciunit copy # Give it a second, and it returns a code.
+
+    sciunit open <id>

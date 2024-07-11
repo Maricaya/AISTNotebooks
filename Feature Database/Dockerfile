@@ -43,8 +43,8 @@ RUN python3 -m pip install connected-components-3d netCDF4 pandas starepandas
 RUN python3 -m pip install versioneer
 RUN python3 -m pip install pythreejs ipywidgets pystareplotlib
 RUN python3 -m pip install cartopy
-RUN git clone https://github.com/skoch9/meshplot.git
-RUN cd meshplot && python3 setup.py install
+RUN python3 -m pip install -U git+https://github.com/skoch9/meshplot.git@v0.4.0
+
 
 # Installing Sciunit
 RUN python3 -m pip install wheel
@@ -59,6 +59,8 @@ COPY ./999-H0-00-IMERG-Analyze-1.py ./999-H0-00-IMERG-Analyze-1.py
 
 # Creating directory to store pickle files
 RUN mkdir pickles
+RUN ulimit -n 4096
+
 
 # Installing dependence files
 RUN wget https://www2.census.gov/geo/tiger/TIGER2019/STATE/tl_2019_us_state.zip
