@@ -34,9 +34,6 @@ ENV PATH=/opt/conda/bin:$PATH
 # Clone Tree-Mortality repository
 RUN git clone https://github.com/Maricaya/Tree-Mortality --branch main
 
-# Copy the environment.yml file into the image
-COPY environment.yml /Tree-Mortality/environment.yml
-
 # Installing Sciunit
 RUN /opt/conda/bin/pip install sciunit2
 
