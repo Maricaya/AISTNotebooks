@@ -10,7 +10,7 @@ All files required by the Kriging application can be downloaded by running the f
  	mkdir data_src
   	cd data_src
    	# --user=<uid> 
-   	wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies --keep-session-cookies --user=xchu -r -c -nH -nd -np -A "$p" --content-disposition "https://aura.gesdisc.eosdis.nasa.gov/data/Aura_OMI_Level2/OMO3PR.003/2021/001";
+   	wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies --keep-session-cookies --user=xchu -r -c -nH -nd -np -A "$p" --content-disposition "https://aura.gesdisc.eosdis.nasa.gov/data/Aura_OMI_Level2/OMO3PR.003/2021/001"
 # Build	
  	docker build -t krigging .
 
