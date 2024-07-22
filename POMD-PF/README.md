@@ -3,7 +3,7 @@
 
 # Post-build requirements:
 Requires installing and mounting flexFS.
-
+docker run --cap-add SYS_ADMIN --device /dev/fuse -v /flexfs/bayesics:/flexfs/bayesics -it pomd_pf
 # Usage
     docker run --cap-add SYS_ADMIN --device /dev/fuse -v /flexfs/bayesics:/flexfs/bayesics -it pomd_pf
     python3 POMD-PF.AIST.10202022.py

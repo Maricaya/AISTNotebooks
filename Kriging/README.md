@@ -17,7 +17,7 @@ All files required by the Kriging application can be downloaded by running the f
 # Usage
  	docker run -it krigging
 	cd NOGGIN && echo 'PYTHONPATH=./ python3 ./Krige/noggin_krige.py -d ./data_src/ -n HDFEOS/SWATHS/O3Profile/Data\ Fields/O3 -m gamma_rayleigh_nuggetless_variogram_model -v' > start.sh
-    chmod +x ./start.sh
+    chmod +x ./start.sh 
     ./start.sh
 
 # Usage With Sciunit

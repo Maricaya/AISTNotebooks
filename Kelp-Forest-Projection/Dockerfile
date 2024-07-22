@@ -1,5 +1,5 @@
-# docker build -t tree-mortality .
-# docker run --cap-add SYS_ADMIN --device /dev/fuse -v /flexfs/bayesics:/flexfs/bayesics -it tree-mortality
+# docker build -t kelp-forest-projection .
+# docker run -it kelp-forest-projection
 FROM ubuntu:20.04
 
 ENV TZ=US \
@@ -8,7 +8,7 @@ ENV TZ=US \
 # Installing package dependencies
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y git wget bzip2 libtool m4 automake build-essential python3 python3-pip python3-dev python3-venv libblas-dev liblapack-dev libatlas-base-dev gfortran libopenblas-dev libblis-dev libmkl-dev curl openssl libssl-dev libcurl4-openssl-dev libgeos-dev python3-tk libhdf4-dev libproj-dev proj-data proj-bin vim tzdata
+    apt-get install -y git wget bzip2 libtool m4 automake build-essential python3 python3-pip python3-dev python3-venv libblas-dev liblapack-dev libatlas-base-dev gfortran libopenblas-dev libblis-dev libmkl-dev curl openssl libssl-dev libcurl4-openssl-dev libgeos-dev python3-tk libhdf4-dev libproj-dev proj-data proj-bin vim tzdata git-lfs
 
 # Install Autoconf
 RUN wget https://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.xz && \
@@ -31,8 +31,16 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 # Set the PATH environment variable to include conda
 ENV PATH=/opt/conda/bin:$PATH
 
-# Clone Tree-Mortality repository
-RUN git clone https://github.com/Maricaya/Tree-Mortality --branch main
+# Clone kelp-forest-projection repository
+# Clone repository without downloading LFS files
+RUN git lfs install && \
+    GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/EcoPro-Systems/Kelp-Forest-Projection.git --branch main
+
+# Change directory to the repository
+WORKDIR /Kelp-Forest-Projection
+
+# Pull only the necessary LFS files (if any)
+#RUN git lfs pull
 
 # Installing Sciunit
 RUN /opt/conda/bin/pip install sciunit2
@@ -42,29 +50,28 @@ RUN ln -fs /usr/share/zoneinfo/America/Chicago /etc/localtime && \
     dpkg-reconfigure --frontend noninteractive tzdata
 
 # Set the working directory
-WORKDIR /Tree-Mortality
+WORKDIR /Kelp-Forest-Projection
 
 # Initialize conda
 RUN /bin/bash -c "source /opt/conda/etc/profile.d/conda.sh && conda init"
 
 # Create and activate the conda environment
 RUN /bin/bash -c "source /opt/conda/etc/profile.d/conda.sh && \
-    conda create -n ecopro python=3.10.6 -y && \
+    conda create -n kelp python=3.9 -y && \
     echo 'source /opt/conda/etc/profile.d/conda.sh' >> ~/.bashrc && \
-    echo 'conda activate ecopro' >> ~/.bashrc"
+    echo 'conda activate kelp' >> ~/.bashrc"
 
 # Add channels and install primary packages
 RUN /bin/bash -c "source /opt/conda/etc/profile.d/conda.sh && \
-    conda activate ecopro && \
-    conda config --add channels conda-forge && \
-    conda config --add channels bioconda && \
-    conda install -y xarray matplotlib cartopy numpy requests pandas"
+    conda activate kelp && \
+    conda install -y ipython jupyter pandas matplotlib scipy scikit-learn"
 
 # Install additional packages
 RUN /bin/bash -c "source /opt/conda/etc/profile.d/conda.sh && \
-    conda activate ecopro && \
-    conda install -y netcdf4 rioxarray rasterio dask zarr tqdm h5netcdf dask-jobqueue && \
-    conda install -y fiona scikit-learn geopandas ray-default snakemake cdsapi skops werkzeug && \
+    conda activate kelp && \
+    conda install -c conda-forge xarray dask netCDF4 bottleneck && \
+    pip install tqdm statsmodels astropy && \
     pip install sciunit2"
 
+## Ensure the container starts with the conda environment activated
 ENTRYPOINT [ "/bin/bash", "-c", "source /root/.bashrc && exec bash" ]
