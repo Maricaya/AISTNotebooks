@@ -68,6 +68,6 @@ RUN /bin/bash -c "source /opt/conda/etc/profile.d/conda.sh && \
     pip install sciunit2"
 
 # Copying data files
-COPY ./data/ /Tree-Mortality
+COPY ./data/ /Tree-Mortality/data
 
 ENTRYPOINT [ "/bin/bash", "-c", "source /root/.bashrc && exec bash" ]
