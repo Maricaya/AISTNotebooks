@@ -9,7 +9,5 @@
 
 # Usage:
     sciunit create tree-mortality  && export TZ='America/Chicago'
-    chmod +x ./01_bcm_pipeline.sh
-    chmod +x ./02_mortality_pipeline.sh
+    chmod +x *.sh
     sciunit exec ./01_bcm_pipeline.sh
-    sciunit exec ./02_mortality_pipeline.sh
