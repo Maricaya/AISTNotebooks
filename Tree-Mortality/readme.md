@@ -1,10 +1,10 @@
 # Build:
     docker build -t tree-mortality .
-    docker run --cap-add SYS_ADMIN --device /dev/fuse -v /flexfs/bayesics:/flexfs/bayesics -it tree-mortality
+    docker run -it tree-mortality
 
 # Post-build requirements:
-    Requires installing and mounting flexFS.
-    If you don't know how to mount flexFS, please send me email.(xchu3@depaul.edu)
+    wget https://depauledu-my.sharepoint.com/:u:/g/personal/xchu3_depaul_edu/EVkiqIrakgxBi1xsf4VU2EAB-3Ibpt0f8Jenqltd3KwEjA?download=1 -O data.zip
+
 
 # Usage:
     sciunit create tree-mortality  && export TZ='America/Chicago'
