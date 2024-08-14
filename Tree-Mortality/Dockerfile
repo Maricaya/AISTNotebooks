@@ -67,7 +67,6 @@ RUN /bin/bash -c "source /opt/conda/etc/profile.d/conda.sh && \
     conda install -y fiona scikit-learn geopandas ray-default snakemake cdsapi skops werkzeug && \
     pip install sciunit2"
 
-# Copying data files
-COPY ./data/ /Tree-Mortality/data
+RUN /bin/bash -c "source /opt/conda/etc/profile.d/conda.sh && conda activate ecopro && conda install libsqlite --force-reinstall -y"
 
 ENTRYPOINT [ "/bin/bash", "-c", "source /root/.bashrc && exec bash" ]
